@@ -1,0 +1,52 @@
+/* Native renderer paint order: image, surfaces, then foreground content. */
+html:has(.thread-scroll-container, [data-composer-placement="home"], [data-testid="home-icon"]) {
+  --wallpaper-desk-veil: color-mix(in srgb, __BASE__ __VEIL__, transparent);
+  background-color: __BASE__ !important;
+  background-image: url("data:__MIME__;base64,__PNG__") !important;
+  background-position: __FOCUS__ center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+html:has(.thread-scroll-container, [data-composer-placement="home"], [data-testid="home-icon"])
+:is(#root,main.main-surface,main[data-app-shell-main-surface],main[class*="_MainContentSurface_"],
+   .app-shell-main-content-frame,[data-app-shell-focus-area="main"],[role="main"],.thread-scroll-container) {
+  background: transparent !important;
+}
+html:has(.thread-scroll-container, [data-composer-placement="home"], [data-testid="home-icon"]) .app-shell-left-panel {
+  background-color: color-mix(in srgb, __PANEL__ 28%, transparent) !important;
+}
+:is(.app-shell-main-content-top-fade,[data-app-shell-main-content-top-fade]:empty),
+.thread-scroll-container [data-thread-scroll-footer="true"] > [aria-hidden="true"].pointer-events-none.absolute.bg-surface {
+  background: transparent !important;
+}
+:is([data-testid="composer-chrome"],[data-codex-composer-root] .bg-surface) {
+  background-color: __BASE__ !important;
+}
+
+/* Codex Windows paints the white main surface as a sibling of the transcript. */
+html:has(.thread-scroll-container, [data-composer-placement="home"], [data-testid="home-icon"])
+:is([data-app-shell-surface-backing], [data-app-shell-frame]) {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+/* Remove the native translucent strip beneath the chat toolbar. */
+html:has(.thread-scroll-container, [data-composer-placement="home"], [data-testid="home-icon"])
+[class*="bg-[image:var(--app-shell-content-fade"] {
+    background-image: none !important;
+}
+/* Apply the selected palette underneath native controls and app states. */
+html {
+    --color-surface: __BASE__ !important;
+    --color-token-main-surface-primary: __BASE__ !important;
+    --color-surface-elevated: __PANEL__ !important;
+    --color-text-primary: __INK__ !important;
+    --color-text-secondary: color-mix(in srgb, __INK__ 72%, __BASE__) !important;
+    --color-text-tertiary: color-mix(in srgb, __INK__ 60%, __BASE__) !important;
+    --color-token-foreground: __INK__ !important;
+    --color-accent: __ACCENT__ !important;
+}
+html:has(.thread-scroll-container, [data-composer-placement="home"], [data-testid="home-icon"]) body {
+  background-color: transparent !important;
+  background-image: linear-gradient(var(--wallpaper-desk-veil), var(--wallpaper-desk-veil)) !important;
+  background-attachment: fixed !important;
+}

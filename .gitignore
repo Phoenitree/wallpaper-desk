@@ -1,0 +1,6 @@
+__pycache__/
+*.log
+wallpaper-settings.json
+custom-wallpaper.image
+*.lnk
+*.zip
